@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile | Music</title>
+    <title>karmonov | Profile</title>
+    <!-- Подключаем иконки соцсетей -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
     <style>
         body {
             margin: 0;
@@ -15,9 +17,10 @@
             color: white;
             font-family: 'Inter', sans-serif;
             overflow: hidden;
-            cursor: none;
+            /* cursor: none; УБРАНО */
         }
 
+        /* Анимированный фон (мягкое свечение) */
         .bg-glow {
             position: absolute;
             width: 600px;
@@ -34,6 +37,7 @@
             to { transform: translate(30%, 30%); }
         }
 
+        /* Стеклянная карточка */
         .card {
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(20px);
@@ -41,82 +45,56 @@
             border-radius: 24px;
             border: 1px solid rgba(255, 255, 255, 0.08);
             text-align: center;
-            width: 360px;
+            width: 320px;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
-            animation: fadeIn 1.5s ease-out;
-            position: relative;
+            animation: fadeIn 1.2s ease-out;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .avatar-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
         .avatar {
-            width: 110px;
-            height: 110px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            object-fit: cover;
-            position: relative;
-            z-index: 2;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(0, 255, 136, 0.4);
+            margin-bottom: 15px;
         }
 
-        .avatar-glow {
-            position: absolute;
-            top: -5px; left: -5px; right: -5px; bottom: -5px;
-            background: linear-gradient(45deg, #00ff88, #007bff);
-            border-radius: 50%;
-            z-index: 1;
-            filter: blur(12px);
-            opacity: 0.5;
-        }
+        h1 { font-size: 26px; margin: 10px 0 5px 0; letter-spacing: -1px; }
+        .tag { color: #00ff88; font-size: 14px; margin-bottom: 30px; display: block; opacity: 0.7; }
 
-        h1 { font-size: 26px; margin: 10px 0 5px 0; font-weight: 600; }
-        .tag { color: #00ff88; font-size: 14px; margin-bottom: 35px; display: block; opacity: 0.8; }
-
-        .links { display: flex; flex-direction: column; gap: 15px; }
+        .links { display: flex; flex-direction: column; gap: 12px; }
 
         .link-btn {
             text-decoration: none;
-            color: rgba(255, 255, 255, 0.9);
-            background: rgba(255, 255, 255, 0.04);
-            padding: 15px;
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 14px;
             border-radius: 12px;
-            font-size: 15px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 500;
         }
 
         .link-btn:hover {
-            background: rgba(0, 255, 136, 0.08);
-            color: #00ff88;
-            border: 1px solid rgba(0, 255, 136, 0.5);
-            box-shadow: 0 0 25px rgba(0, 255, 136, 0.15);
-        }
-
-        .cursor {
-            width: 8px; height: 8px;
-            background: #00ff88;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 999;
-            box-shadow: 0 0 15px #00ff88;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid #00ff88;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
         }
 
         #play-hint {
             position: fixed;
             top: 20px;
             font-size: 10px;
-            color: rgba(255, 255, 255, 0.3);
-            letter-spacing: 3px;
+            color: rgba(255, 255, 255, 0.2);
+            letter-spacing: 2px;
             text-transform: uppercase;
         }
     </style>
@@ -124,41 +102,33 @@
 <body>
 
     <div class="bg-glow"></div>
-    <div class="cursor" id="cursor"></div>
-    <div id="play-hint">Click anywhere to play music</div>
+    <div id="play-hint">Tap for music</div>
 
     <audio id="bg-music" loop>
         <source src="https://www.soundhelix.com" type="audio/mpeg">
     </audio>
 
     <div class="card">
-        <div class="avatar-container">
-            <div class="avatar-glow"></div>
-            <img src="https://api.dicebear.com" alt="Avatar" class="avatar">
-        </div>
-        
-        <h1>Твой Ник</h1>
-        <span class="tag">@username</span>
+        <img src="https://api.dicebear.com" alt="Avatar" class="avatar">
+        <h1>karmonov</h1>
+        <span class="tag">@karmonov</span>
 
         <div class="links">
-            <a href="https://t.me" class="link-btn" target="_blank">Telegram</a>
-            <a href="https://discord.com" class="link-btn" target="_blank">Discord</a>
+            <a href="https://t.me" class="link-btn" target="_blank">
+                <i class="fab fa-telegram"></i> Telegram
+            </a>
+            <a href="https://discord.com" class="link-btn" target="_blank">
+                <i class="fab fa-discord"></i> Discord
+            </a>
         </div>
     </div>
 
     <script>
-        const cursor = document.getElementById('cursor');
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-
-        // Музыка при первом клике
         document.addEventListener('click', () => {
-            document.getElementById('bg-music').play();
+            const music = document.getElementById('bg-music');
+            music.play().catch(() => console.log("Music blocked"));
             document.getElementById('play-hint').style.display = 'none';
         }, { once: true });
     </script>
-
 </body>
 </html>
