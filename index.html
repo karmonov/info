@@ -2,13 +2,26 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>karmonov | White Style</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
     <style>
-        body { margin: 0; height: 100vh; display: flex; align-items: center; justify-content: center; background: #050505; color: white; font-family: 'Inter', sans-serif; overflow: hidden; position: relative; cursor: pointer; }
+        * {
+            /* Убираем синее выделение при нажатии на телефоне */
+            -webkit-tap-highlight-color: transparent;
+            /* Запрещаем выделение текста для красоты */
+            user-select: none;
+        }
+
+        body { 
+            margin: 0; height: 100vh; display: flex; align-items: center; justify-content: center; 
+            background: #050505; color: white; font-family: 'Inter', sans-serif; 
+            overflow: hidden; position: relative; 
+        }
+
         .bg-glow { position: absolute; width: 800px; height: 800px; background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%); border-radius: 50%; filter: blur(100px); animation: move 20s infinite alternate ease-in-out; z-index: -1; }
         @keyframes move { from { transform: translate(-30%, -30%); } to { transform: translate(30%, 30%); } }
+        
         .rain { position: absolute; width: 1px; height: 50px; background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.3)); animation: fall 1s linear infinite; }
         @keyframes fall { 0% { transform: translateY(-10vh); opacity: 1; } 100% { transform: translateY(110vh); opacity: 0; } }
         
@@ -18,26 +31,19 @@
         @keyframes appear { to { opacity: 1; transform: translateY(0); filter: blur(0); } }
 
         .avatar { animation-delay: 0.2s; width: 100px; height: 100px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.3); margin-bottom: 15px; object-fit: cover; transition: 0.5s ease; box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); }
-        .avatar:hover { transform: scale(1.1) rotate(3deg); border-color: rgba(255, 255, 255, 0.8); box-shadow: 0 0 30px rgba(255, 255, 255, 0.3); }
+        .avatar:hover { transform: scale(1.1) rotate(3deg); border-color: rgba(255, 255, 255, 0.8); }
         
         h1 { animation-delay: 0.4s; font-size: 26px; margin: 10px 0 5px 0; letter-spacing: -1px; }
-        .bio { animation-delay: 0.6s; font-size: 13px; color: rgba(255, 255, 255, 0.5); margin-bottom: 25px; font-weight: 300; line-height: 1.4; padding: 0 10px; }
+        .bio { animation-delay: 0.6s; font-size: 13px; color: rgba(255, 255, 255, 0.5); margin-bottom: 25px; font-weight: 300; line-height: 1.4; }
         
         .links { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
-        .link-1 { animation-delay: 0.8s; }
-        .link-2 { animation-delay: 1.0s; }
-        .widget-anim { animation-delay: 1.2s; }
-
         .link-btn { text-decoration: none; color: white; background: rgba(255, 255, 255, 0.08); padding: 14px; border-radius: 12px; transition: 0.3s; border: 1px solid rgba(255, 255, 255, 0.2); display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 500; position: relative; overflow: hidden; }
-        .link-btn::after { content: ''; position: absolute; top: -50%; left: -60%; width: 20%; height: 200%; background: rgba(255, 255, 255, 0.2); transform: rotate(30deg); transition: 0.5s; }
-        .link-btn:hover::after { left: 120%; }
         .link-btn:hover { background: rgba(255, 255, 255, 0.15); border: 1px solid white; transform: translateY(-2px); }
 
         .player-widget { background: rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 15px; border: 1px solid rgba(255, 255, 255, 0.1); }
-        .track-name { font-size: 10px; font-weight: 600; color: #aaa; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .track-name { font-size: 10px; font-weight: 600; color: #aaa; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
         .controls { display: flex; align-items: center; justify-content: center; gap: 20px; }
         .control-btn { cursor: pointer; font-size: 18px; transition: 0.3s; color: rgba(255,255,255,0.8); }
-        .control-btn:hover { color: #fff; transform: scale(1.2); }
         .main-play { font-size: 24px !important; width: 30px; }
         .vol-container { margin-top: 15px; display: flex; align-items: center; gap: 8px; }
         #volumeSlider { width: 100%; height: 3px; cursor: pointer; accent-color: white; }
@@ -45,7 +51,7 @@
 </head>
 <body>
     <div class="bg-glow"></div>
-    <audio id="bg-music" loop preload="auto">
+    <audio id="bg-music" loop autoplay playsinline>
         <source src="spaztastic_waifu_-_decoder_(Zvyki.com).mp3" type="audio/mpeg">
     </audio>
 
@@ -55,11 +61,11 @@
         <p class="bio fade-in">I'm studying cybersecurity and HTML website creation</p>
 
         <div class="links">
-            <a href="https://t.me" class="link-btn fade-in link-1" target="_blank"><i class="fa-brands fa-telegram"></i> Telegram</a>
-            <a href="https://discord.com" class="link-btn fade-in link-2" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a>
+            <a href="https://t.me" class="link-btn fade-in" style="animation-delay: 0.8s" target="_blank"><i class="fa-brands fa-telegram"></i> Telegram</a>
+            <a href="https://discord.com" class="link-btn fade-in" style="animation-delay: 1.0s" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a>
         </div>
 
-        <div class="player-widget fade-in widget-anim">
+        <div class="player-widget fade-in" style="animation-delay: 1.2s">
             <div class="track-name">spaztastic waifu - decoder</div>
             <div class="controls">
                 <i class="fas fa-backward-step control-btn" id="prevBtn"></i>
@@ -76,34 +82,26 @@
         const prevBtn = document.getElementById('prevBtn');
         const volSlider = document.getElementById('volumeSlider');
 
-        function updatePlayIcon() {
-            if (audio.paused) {
-                playBtn.classList.replace('fa-pause', 'fa-play');
-            } else {
-                playBtn.classList.replace('fa-play', 'fa-pause');
-            }
+        function updateIcon() {
+            playBtn.className = audio.paused ? 'fas fa-play control-btn main-play' : 'fas fa-pause control-btn main-play';
         }
 
-        function togglePlay() {
-            if (audio.paused) {
-                audio.play().then(updatePlayIcon).catch(e => console.log("Кликните для звука"));
-            } else {
-                audio.pause();
-                updatePlayIcon();
-            }
+        function playAudio() {
+            audio.play().then(updateIcon).catch(() => console.log("Браузер ждет клика"));
         }
 
-        playBtn.onclick = (e) => { e.stopPropagation(); togglePlay(); };
-        prevBtn.onclick = (e) => { e.stopPropagation(); audio.currentTime = 0; };
+        // Пытаемся запустить сразу
+        window.addEventListener('load', playAudio);
+
+        // Запуск при ЛЮБОМ клике/тапе по экрану
+        document.addEventListener('mousedown', playAudio, { once: false });
+        document.addEventListener('touchstart', playAudio, { once: false });
+
+        playBtn.onclick = (e) => { e.stopPropagation(); audio.paused ? audio.play() : audio.pause(); updateIcon(); };
+        prevBtn.onclick = (e) => { e.stopPropagation(); audio.currentTime = 0; audio.play(); updateIcon(); };
         volSlider.oninput = (e) => { audio.volume = e.target.value; };
-        
-        // Глобальный клик для автозапуска
-        document.body.onclick = () => { 
-            if(audio.paused && audio.currentTime === 0) {
-                togglePlay(); 
-            }
-        };
 
+        // Эффект дождя
         function createRaindrop() {
             const rain = document.createElement('div');
             rain.classList.add('rain');
