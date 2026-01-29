@@ -9,7 +9,6 @@
         * { -webkit-tap-highlight-color: transparent; user-select: none; box-sizing: border-box; }
         body { margin: 0; height: 100vh; display: flex; align-items: center; justify-content: center; background: #000; color: white; font-family: 'Inter', sans-serif; overflow: hidden; position: relative; }
 
-        /* ЭКРАН ПРИВЕТСТВИЯ */
         #overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 100;
@@ -18,12 +17,10 @@
         }
         #overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; transform: scale(1.1); }
         
-        .welcome-title { font-size: 18px; letter-spacing: 3px; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; text-align: center; }
+        .welcome-title { font-size: 18px; letter-spacing: 3px; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; text-align: center; text-shadow: 0 0 10px #fff, 0 0 20px #0fa, 0 0 30px #0fa; }
         .click-hint { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.4); animation: pulse 2s infinite; }
-        
         @keyframes pulse { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
 
-        /* ОСНОВНОЙ КОНТЕНТ */
         #main-content { filter: blur(30px); transition: 2s ease; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; }
         #main-content.active { filter: blur(0); opacity: 1; }
 
@@ -35,11 +32,34 @@
         
         .card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); padding: 40px; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.1); text-align: center; width: 320px; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8); z-index: 10; }
         .avatar { width: 100px; height: 100px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.3); margin-bottom: 15px; object-fit: cover; }
+        
         h1 { font-size: 26px; margin: 10px 0 5px 0; letter-spacing: -1px; }
-        .bio { font-size: 13px; color: rgba(255, 255, 255, 0.5); margin-bottom: 15px; font-weight: 300; }
+        
+        /* СТИЛИ ДЛЯ ПЕЧАТАЮЩЕГО ТЕКСТА */
+        .bio { 
+            font-size: 13px; color: rgba(255, 255, 255, 0.5); margin-bottom: 15px; font-weight: 300; line-height: 1.4; padding: 0 10px;
+            overflow: hidden; /* Скрывает текст до анимации */
+            border-right: .15em solid rgba(255,255,255,0.7); /* Имитация курсора */
+            white-space: nowrap;
+            letter-spacing: .08em;
+            animation: typing 3s steps(43, end) forwards, blink-caret .75s step-end infinite;
+            width: 0; /* Начальная ширина 0 */
+        }
+
+        /* Анимация печати */
+        @keyframes typing {
+          from { width: 0 }
+          to { width: 100% }
+        }
+
+        /* Анимация мигания курсора */
+        @keyframes blink-caret {
+          from, to { border-color: transparent }
+          50% { border-color: rgba(255,255,255,0.7) }
+        }
 
         .equalizer { display: flex; align-items: flex-end; justify-content: center; gap: 3px; height: 30px; margin-bottom: 25px; }
-        .bar { width: 4px; height: 2px; background: white; border-radius: 2px; opacity: 0.8; transition: height 0.1s ease; }
+        .bar { width: 4px; height: 2px; background: white; border-radius: 2px; opacity: 0.8; transition: height 0.1s ease; box-shadow: 0 0 5px rgba(255,255,255,0.2); }
 
         .links { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
         .link-btn { text-decoration: none; color: white; background: rgba(255, 255, 255, 0.08); padding: 14px; border-radius: 12px; transition: 0.3s; border: 1px solid rgba(255, 255, 255, 0.2); display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 500; }
@@ -55,7 +75,6 @@
 </head>
 <body>
 
-    <!-- ПРИВЕТСТВЕННЫЙ ЭКРАН -->
     <div id="overlay" onclick="enterSite()">
         <div class="welcome-title">Welcome to Info Karmonova</div>
         <div class="click-hint">Click to Enter</div>
@@ -63,14 +82,14 @@
 
     <div id="main-content">
         <div class="bg-glow"></div>
-        <!-- ПРОВЕРЬ ПУТЬ К ТРЕКУ НИЖЕ -->
         <audio id="bg-music" loop crossorigin="anonymous">
-            <source src="your_audio_file.mp3" type="audio/mpeg">
+            <source src="spaztastic_waifu_-_decoder_(Zvyki.com).mp3" type="audio/mpeg">
         </audio>
 
         <div class="card">
             <img src="96f318d30095a2a3f0c21659e817d352.jpg" alt="Avatar" class="avatar">
             <h1>karmonov</h1>
+            <!-- Текст с эффектом печати -->
             <p class="bio">I'm studying cybersecurity and HTML website creation</p>
 
             <div class="equalizer" id="equalizer">
@@ -82,10 +101,11 @@
             <div class="links">
                 <a href="https://t.me" class="link-btn" target="_blank"><i class="fa-brands fa-telegram"></i> Telegram</a>
                 <a href="https://discord.com" class="link-btn" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a>
+                <a href="https://github.com" class="link-btn" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
             </div>
 
             <div class="player-widget">
-                <div class="track-name">Track Title Here</div>
+                <div class="track-name">spaztastic waifu - decoder</div>
                 <div class="controls">
                     <i class="fas fa-backward-step control-btn" id="prevBtn"></i>
                     <i class="fas fa-play control-btn main-play" id="playBtn"></i>
@@ -104,29 +124,24 @@
 
         let audioCtx, analyzer, dataArray, source;
 
+        function initAudio() {
+            if (audioCtx) return;
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            analyzer = audioCtx.createAnalyzer();
+            source = audioCtx.createMediaElementSource(audio);
+            source.connect(analyzer);
+            analyzer.connect(audioCtx.destination);
+            analyzer.fftSize = 64;
+            dataArray = new Uint8Array(analyzer.frequencyBinCount);
+            renderFrame();
+        }
+
         function enterSite() {
             document.getElementById('overlay').classList.add('hidden');
             document.getElementById('main-content').classList.add('active');
-            
-            // Инициализация Web Audio API строго после клика
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                analyzer = audioCtx.createAnalyzer();
-                source = audioCtx.createMediaElementSource(audio);
-                source.connect(analyzer);
-                analyzer.connect(audioCtx.destination);
-                analyzer.fftSize = 64;
-                dataArray = new Uint8Array(analyzer.frequencyBinCount);
-                renderFrame();
-            }
-            
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-
-            audio.play().then(() => {
-                updateUI();
-            }).catch(err => console.log("Audio play error: ", err));
+            initAudio();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            audio.play().then(updateUI).catch(e => console.log("Ошибка запуска аудио"));
         }
 
         function renderFrame() {
@@ -143,12 +158,7 @@
             playBtn.className = audio.paused ? 'fas fa-play control-btn main-play' : 'fas fa-pause control-btn main-play';
         }
 
-        playBtn.onclick = (e) => { 
-            e.stopPropagation(); 
-            audio.paused ? audio.play() : audio.pause(); 
-            updateUI(); 
-        };
-
+        playBtn.onclick = (e) => { e.stopPropagation(); audio.paused ? audio.play() : audio.pause(); updateUI(); };
         prevBtn.onclick = (e) => { e.stopPropagation(); audio.currentTime = 0; audio.play(); updateUI(); };
         volSlider.oninput = (e) => { audio.volume = e.target.value; };
 
